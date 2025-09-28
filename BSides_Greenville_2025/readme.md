@@ -102,7 +102,7 @@ Your CH32V003 board's LED should now be blinking! 🎉
 ## Badge Details
 <img width="668" height="680" alt="image" src="https://github.com/user-attachments/assets/8dfd9593-d4c0-4bfd-95ef-81f412da48ed" />
 
-* **Pinout**:
+* **SWIO Pinout (Red Square)**:
   * Pin 1 - Marked with the Dot - SWIO
   * pin 2 - VCC (3.3V)
   * Pin 3 Ground
