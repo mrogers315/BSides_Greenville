@@ -1,135 +1,99 @@
------
+---
 
-# Getting Started with the CH32V003
+# Getting Started with CH32V003 and MounRiver Studio
 
-This guide provides a straightforward method for setting up a development environment, compiling code, and flashing firmware to the **CH32V003**, an ultra-low-cost RISC-V microcontroller by WCH.
 
-This setup uses the open-source `ch32v003fun` toolchain and a **WCH-LinkE** programmer.
 
------
+This guide provides a step-by-step tutorial for setting up a development environment, creating a project, and flashing firmware to the **CH32V003** microcontroller using **MounRiver Studio**.
+
+MounRiver Studio is an all-in-one IDE that simplifies the development process, making it great for beginners.
+
+***
 
 ## Prerequisites
 
 ### Hardware
-
-  * **CH32V003 Development Board**: Any board featuring the CH32V003 microcontroller.
-  * **WCH-LinkE Programmer**: A debugger/programmer that supports SWDIO for WCH microcontrollers.
-  * **USB Cable**: To connect the WCH-LinkE to your computer.
+* **CH32V003 Development Board**: Any board featuring the CH32V003 chip.
+* **WCH-LinkE Programmer**: The official debugger/programmer for WCH microcontrollers.
+* **USB Cable**: To connect the WCH-LinkE to your computer.
 
 ### Software
+* **MounRiver Studio**: The integrated development environment (IDE).
 
-  * **Git**: For cloning the necessary repositories.
-  * **RISC-V Toolchain**: A compiler for the RISC-V architecture.
-  * **minichlink**: A tool for flashing firmware using the WCH-LinkE.
+***
 
------
+## 1. Install MounRiver Studio
 
-## 1\. Software Setup
+First, you need to download and install the IDE.
 
-These steps will guide you through installing the necessary compiler and flashing tools.
+1.  Navigate to the [WCH MounRiver download page](http://www.mounriver.com/download).
+2.  Download the latest version for your operating system (Windows is primarily supported).
+3.  Run the installer and follow the on-screen instructions. The setup will automatically install the necessary toolchain and drivers for the WCH-LinkE.
 
-### Install the RISC-V Toolchain
+***
 
-You can download a pre-built toolchain or build it from source. The easiest method is to download it.
+## 2. Create a New Project
 
-1.  Go to the [xPack GNU RISC-V Embedded GCC releases page](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases).
-2.  Download the latest version appropriate for your operating system (Windows, macOS, or Linux).
-3.  Extract the archive to a known location (e.g., `C:\toolchains\` on Windows or `/opt/toolchains/` on Linux/macOS).
-4.  **Add the toolchain's `bin` directory to your system's PATH.** This allows you to run the compiler from any terminal.
-      * **Windows:** Search for "Edit the system environment variables," click "Environment Variables," find "Path" in the "System variables" list, click "Edit," and add the full path to the `bin` folder (e.g., `C:\toolchains\xpack-riscv-none-embed-gcc-12.3.0-1\bin`).
-      * **Linux/macOS:** Add the following line to your shell profile (e.g., `~/.bashrc`, `~/.zshrc`):
-        ```bash
-        export PATH="/opt/toolchains/xpack-riscv-none-embed-gcc-12.3.0-1/bin:$PATH"
-        ```
+Let's create a simple "Blink" project from a template.
 
-### Install `minichlink`
+1.  Open MounRiver Studio.
+2.  Go to **File** -> **New** -> **MounRiver Project**.
+3.  In the "Target Chip" selection window, choose **CH32V003F4P6**. Click **Next**.
+    
+4.  Give your project a name (e.g., `CH32V003_Blink`).
+5.  Select a project template. For a simple start, expand **GPIO** and choose **GPIO_Toggle**. This provides a pre-written code example to blink an LED.
+6.  Click **Finish**.
 
-This tool is used to flash the firmware onto the CH32V003.
+The IDE will generate a project with all the necessary files, including the main C file (`Main.c`) with the blinking logic.
 
-1.  **Clone the repository:**
+***
 
-    ```bash
-    git clone https://github.com/cnlohr/minichlink
-    ```
+## 3. Build the Project
 
-2.  **Build the tool:**
+Compiling your code converts it into a machine-readable format that the microcontroller can execute.
 
-      * **Linux/macOS:**
-        ```bash
-        cd minichlink
-        make
-        ```
-      * **Windows:** Follow the build instructions in the `minichlink` repository, which typically involve using a tool like MSYS2 or Cygwin.
+1.  In MounRiver Studio, click the **Build** icon (the hammer 🔨) in the toolbar.
+2.  Alternatively, go to **Project** -> **Build Project**.
+3.  Wait for the process to complete. You can monitor the progress in the **Console** window at the bottom. A "Build Finished" message indicates success.
 
-3.  **Install udev rules (Linux only):** This step is crucial for allowing `minichlink` to access the WCH-LinkE programmer without root privileges.
+***
 
-    ```bash
-    cd minichlink
-    sudo cp 99-wch-link.rules /etc/udev/rules.d/
-    sudo udevadm control --reload-rules && sudo udevadm trigger
-    ```
+## 4. Connect the Hardware
 
------
-
-## 2\. Project Setup & Build
-
-Now you can get a sample project and compile it.
-
-### Clone the `ch32v003fun` Example Project
-
-The `ch32v003fun` project provides an excellent starting point with a pre-configured build system and examples.
-
-```bash
-git clone https://github.com/cnlohr/ch32v003fun
-cd ch32v003fun/examples/blink
-```
-
-### Build the Code
-
-Inside the `blink` example directory, run the `make` command. This will compile the C code and create a firmware file (`blink.hex`).
-
-```bash
-make
-```
-
-If the build is successful, you will see output from the compiler and a new `blink.hex` file will be present in the directory.
-
------
-
-## 3\. Flashing the Microcontroller
-
-With the firmware built, you can now flash it to the chip.
-
-### Connect the Hardware
+Now, connect your programmer to the microcontroller board.
 
 1.  Connect the **WCH-LinkE** to your computer via USB.
-2.  Connect the **WCH-LinkE** to the CH32V003 board. The connection requires at least three wires:
-      * `SWDIO` -\> `SWDIO` (Pin `PC1` on the CH32V003)
-      * `GND` -\> `GND`
-      * `3.3V` -\> `3.3V`
+2.  Connect the WCH-LinkE to the CH32V003 board using the following pins:
+    * `SWDIO` -> `SWDIO` (Pin `PC1` on the CH32V003)
+    * `GND` -> `GND`
+    * `3.3V` -> `3.3V`
 
-### Flash the Firmware
 
-Use the `minichlink` tool you built earlier to upload the `.hex` file. The tool should be located in the `minichlink` directory.
 
-From the `ch32v003fun/examples/blink` directory, run the following command. You may need to adjust the path to the `minichlink` executable.
+**Important**: Ensure the connections are secure. A poor connection is the most common cause of flashing failures.
 
-```bash
-../../minichlink/minichlink -w blink.hex
-```
+***
 
-If you want to flash and then immediately start a serial monitor to view output (if your code uses it), you can add the `-p` flag:
+## 5. Flash the Microcontroller
 
-```bash
-../../minichlink/minichlink -w blink.hex -p
-```
+Flashing (or "downloading") uploads your compiled code to the chip's memory.
 
-You should see output confirming that the flash was successful. The LED on your CH32V003 board should now be blinking\! 🎉
+1.  In MounRiver Studio, click the **Download** icon (the green arrow pointing down ⬇️) in the toolbar.
+2.  The IDE will automatically detect the WCH-LinkE and the target chip.
+3.  The console will display the flashing progress. A message like "Download success" or "Verify success" means the code has been successfully uploaded.
 
------
+Your CH32V003 board's LED should now be blinking! 🎉
+
+***
 
 ## Troubleshooting
 
-  * **`make: riscv-none-embed-gcc: Command not found`**: This means the RISC-V toolchain is not in your system's PATH. Double-check your environment variable setup.
-  * **`minichlink` permission errors (Linux)**: Ensure you have correctly installed the udev rules. You may need to unplug and replug the WCH-LinkE after setting them up.
-  * **Flashing fails**: Check your wiring. Ensure `SWDIO`, `GND`, and `3.3V` are all connected correctly and securely between the WCH-LinkE and the CH32V003 board.
+* **WCH-LinkE Not Found**:
+    * Ensure the WCH-LinkE is securely plugged into your computer's USB port.
+    * Try reinstalling MounRiver Studio to make sure the drivers were installed correctly.
+    * Check your system's device manager to see if the WCH-LinkE is recognized.
+
+* **Download Failed**:
+    * Double-check your wiring between the WCH-LinkE and the CH32V003. `SWDIO`, `GND`, and `3.3V` must all be correctly connected.
+    * Ensure the CH32V003 board is receiving power.
+    * Close and reopen MounRiver Studio and try again.
