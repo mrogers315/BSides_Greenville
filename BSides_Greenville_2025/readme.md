@@ -107,3 +107,13 @@ Your CH32V003 board's LED should now be blinking! 🎉
   * pin 2 - VCC (3.3V)
   * Pin 3 Ground
 
+* **GPIO**:
+  * 0 - PA2
+  * 1 - PA1
+  * 2 - PC4
+  * 3 - PD2
+  * 4 - PD3
+  * 5 - PD5
+  * 6 - PD6
+  * 7 - PD4
+
