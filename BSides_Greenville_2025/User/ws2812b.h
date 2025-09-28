@@ -101,7 +101,7 @@ static const unsigned char sintable[] = {
 	0x0a, 0x0b, 0x0d, 0x0e, 0x10, 0x11, 0x13, 0x14, 0x16, 0x18, 0x1a, 0x1b, 0x1d, 0x1f, 0x21, 0x24, 
 	0x26, 0x28, 0x2a, 0x2d, 0x2f, 0x31, 0x34, 0x36, 0x39, 0x3c, 0x3e, 0x41, 0x44, 0x47, 0x49, 0x4c, 
 	0x4f, 0x52, 0x55, 0x58, 0x5b, 0x5e, 0x61, 0x64, 0x67, 0x6a, 0x6d, 0x70, 0x73, 0x76, 0x79, 0x7d };
-
+/* Hue tables for setting colors */
 static const unsigned char hue_r[] = {
     255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
     255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
@@ -158,6 +158,8 @@ static const unsigned char hue_b[] = {
       0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
 };
+
+/**********************************************************************************/
 
 static inline uint32_t FastMultiply( uint32_t big_num, uint32_t small_num ) __attribute__((section(".srodata")));
 static inline uint32_t FastMultiply( uint32_t big_num, uint32_t small_num )
@@ -330,44 +332,19 @@ void WS2812B_FadeColors(uint8_t d, uint8_t brightness) {
 
 void WS2812B_ChaseColor(uint8_t d, uint8_t brightness)
 {
-        for(int j = 0; j<16; j++)
+	for(int h=0; h<255; h+=5){
+		for(int j = 0; j<LED_NUM; j++)
         {
-                for(int i=0; i<LED_NUM; i++){ 
-                    if((i+j%4)%2){           
-                        setLed(i, 0, 0, 255/brightness);
-                    }else{
-                        setLed(i, 0, 0, 0);
-                    }
-                }
-				show();
-				Delay_Ms(d);
+            for(int i=0; i<LED_NUM; i++){ 
+                if((i+j)%2){
+					setLed(i, 0, 0, 0);					
+                }else{
+					setLed(i, hue_r[h]/brightness, hue_g[h]/brightness, hue_b[h]/brightness);
+				}
+            }
+			show();
+			Delay_Ms(d);
         }
-        for(int j = 0; j<16; j++)
-        {
-                for(int i=0; i<LED_NUM; i++){
-                    if((i+j%4)%2){
-                        setLed(i, 0, 255/brightness, 0);
-                    }else{
-                        setLed(i, 0, 0, 0);
-                    }
-                }
-				show();
-				Delay_Ms(d);
-        }
-        
-        for(int j = 0; j<16; j++)
-        {
-            // Fade from Green to Red
-
-                for(int i=0; i<LED_NUM; i++){
-                    if((i+j%4)%2){
-                        setLed(i, 255/brightness, 0, 0);
-                    }else{
-                        setLed(i, 0, 0, 0);
-                    }
-                }
-				show();
-				Delay_Ms(d);
-        }
+	}
 }
 #endif

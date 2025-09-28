@@ -34,14 +34,14 @@ int main(void)
 
     while (1) //Infinite loop
     {
-        for(int i=0; i<4; i++){
+       for(int i=0; i<4; i++){
             WS2812B_FadeColors(100, 6);
         }
-        for(int i=0; i<2; i++){
-            WS2812B_ChaseColor(200, 6);
+        for(int i=0; i<1; i++){
+            WS2812B_ChaseColor(100, 6);
         }
-        for(int i=0; i<32; i++){
-            WS2812B_Rainbow_Chase(10, 6);
+        for(int i=0; i<8; i++){
+            WS2812B_Rainbow_Chase(20, 6);
         }
 
     }
