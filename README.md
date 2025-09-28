@@ -1,5 +1,3 @@
-Of course\! Here is a GitHub README that explains how to set up and load software to a CH32V003 microcontroller.
-
 -----
 
 # Getting Started with the CH32V003
