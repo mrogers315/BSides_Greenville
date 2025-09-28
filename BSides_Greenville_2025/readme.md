@@ -97,3 +97,13 @@ Your CH32V003 board's LED should now be blinking! 🎉
     * Double-check your wiring between the WCH-LinkE and the CH32V003. `SWDIO`, `GND`, and `3.3V` must all be correctly connected.
     * Ensure the CH32V003 board is receiving power.
     * Close and reopen MounRiver Studio and try again.
+ 
+***
+## Badge Details
+<img width="668" height="680" alt="image" src="https://github.com/user-attachments/assets/8dfd9593-d4c0-4bfd-95ef-81f412da48ed" />
+
+* **Pinout**:
+  * Pin 1 - Marked with the Dot - SWIO
+  * pin 2 - VCC (3.3V)
+  * Pin 3 Ground
+
