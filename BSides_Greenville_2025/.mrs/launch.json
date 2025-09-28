@@ -5,7 +5,7 @@
 			"type": "mrs-debugger",
 			"request": "launch",
 			"name": "CH32V003F4U6_WS2812_Bit_bang",
-			"cwd": "c:\\Users\\roger\\mounriver-studio-projects\\CH32V003F4U6_WS2812_Bit_bang",
+			"cwd": "c:\\Users\\roger\\OneDrive\\Documents\\GitHub\\BSides_Greenville\\BSides_Greenville_2025",
 			"openOCDCfg": {
 				"useLocalOpenOCD": true,
 				"executable": "c:/MounRiver/MounRiver_Studio2/resources/app/resources/win32/components/WCH/OpenOCD/OpenOCD/bin/openocd.exe",
@@ -39,8 +39,8 @@
 					"additionalCommands": []
 				},
 				"loadedFiles": {
-					"executableFile": "c:\\Users\\roger\\mounriver-studio-projects\\CH32V003F4U6_WS2812_Bit_bang\\obj\\CH32V003F4U6_WS2812_Bit_bang.elf",
-					"symbolFile": "c:\\Users\\roger\\mounriver-studio-projects\\CH32V003F4U6_WS2812_Bit_bang\\obj\\CH32V003F4U6_WS2812_Bit_bang.elf",
+					"executableFile": "c:\\Users\\roger\\OneDrive\\Documents\\GitHub\\BSides_Greenville\\BSides_Greenville_2025\\obj\\CH32V003F4U6_WS2812_Bit_bang.elf",
+					"symbolFile": "c:\\Users\\roger\\OneDrive\\Documents\\GitHub\\BSides_Greenville\\BSides_Greenville_2025\\obj\\CH32V003F4U6_WS2812_Bit_bang.elf",
 					"executableFileOffset": 0,
 					"symbolFileOffset": 0
 				},

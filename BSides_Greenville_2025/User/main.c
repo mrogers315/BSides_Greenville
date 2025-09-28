@@ -1,14 +1,19 @@
+/*
+    A basic project to shown the WS2812B capablilties of the CH32V003 MCU
+    LEDs are coonected to PC6. 
 
+*/
 #include "debug.h"
-#include "ws2812b.h"
-
 
 /* Global define */
+#define LED_NUM 16
+
+#include "ws2812b.h"
 
 /* Global Variable */
 uint8_t offset = 1;
-uint32_t led[16] = {0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000};
 
+//GPIO Setup
 void WS2812B_Init(void)
 {
     GPIO_InitTypeDef GPIO_InitStructure = {0};
@@ -20,23 +25,24 @@ void WS2812B_Init(void)
 }
 
 
-
+//Main Function
 int main(void)
 {
     RCC_AdjustHSICalibrationValue(0x10);
     WS2812B_Init();
 	Delay_Init();
-    int i=0;
 
-
-    while (1)
+    while (1) //Infinite loop
     {
-        //WS2812B_FadeColors(16, 6);
-        //WS2812B_ChaseColor(16, 1, 6);
-        for(int j=0; j<255; j++){
-            WS2812B_Hue_Table(16,(i%256), 6);
-            i = i + 16;
-        }   
+        for(int i=0; i<4; i++){
+            WS2812B_FadeColors(100, 6);
+        }
+        for(int i=0; i<2; i++){
+            WS2812B_ChaseColor(200, 6);
+        }
+        for(int i=0; i<32; i++){
+            WS2812B_Rainbow_Chase(10, 6);
+        }
 
     }
 }

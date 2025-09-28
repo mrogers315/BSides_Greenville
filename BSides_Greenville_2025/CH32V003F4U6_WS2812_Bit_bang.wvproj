@@ -313,7 +313,7 @@
 	"flashConfig": {
 		"mcutype": "CH32V003",
 		"address": "0x08000000",
-		"target_path": "C:\\Users\\roger\\mounriver-studio-projects\\CH32V003F4U6_WS2812_Bit_bang\\obj\\CH32V003F4U6_WS2812_Bit_bang.hex",
+		"target_path": "C:\\Users\\roger\\OneDrive\\Documents\\GitHub\\BSides_Greenville\\BSides_Greenville_2025\\obj\\CH32V003F4U6_WS2812_Bit_bang.hex",
 		"clkSpeed": "High",
 		"debug_interface_mode": "",
 		"erase": true,

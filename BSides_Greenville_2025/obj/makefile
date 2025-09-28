@@ -56,7 +56,7 @@ main-build: CH32V003F4U6_WS2812_Bit_bang.elf secondary-outputs
 
 # Tool invocations
 CH32V003F4U6_WS2812_Bit_bang.elf: $(OBJS) $(USER_OBJS)
-	@	riscv-none-embed-gcc -march=rv32ecxw -mabi=ilp32e -msmall-data-limit=0 -msave-restore -fmax-errors=20 -Os -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -fno-common -Wunused -Wuninitialized -g -T "c:/Users/roger/mounriver-studio-projects/CH32V003F4U6_WS2812_Bit_bang/Ld/Link.ld" -nostartfiles -Xlinker --gc-sections -Xlinker --print-memory-usage -Wl,-Map,"CH32V003F4U6_WS2812_Bit_bang.map" --specs=nano.specs --specs=nosys.specs -o "CH32V003F4U6_WS2812_Bit_bang.elf" $(OBJS)  $(LIBS) -lprintf
+	@	riscv-none-embed-gcc -march=rv32ecxw -mabi=ilp32e -msmall-data-limit=0 -msave-restore -fmax-errors=20 -Os -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -fno-common -Wunused -Wuninitialized -g -T "c:/Users/roger/OneDrive/Documents/GitHub/BSides_Greenville/BSides_Greenville_2025/Ld/Link.ld" -nostartfiles -Xlinker --gc-sections -Xlinker --print-memory-usage -Wl,-Map,"CH32V003F4U6_WS2812_Bit_bang.map" --specs=nano.specs --specs=nosys.specs -o "CH32V003F4U6_WS2812_Bit_bang.elf" $(OBJS)  $(LIBS) -lprintf
 CH32V003F4U6_WS2812_Bit_bang.bin: CH32V003F4U6_WS2812_Bit_bang.elf
 	@	riscv-none-embed-objcopy -O binary "CH32V003F4U6_WS2812_Bit_bang.elf" "CH32V003F4U6_WS2812_Bit_bang.bin"
 CH32V003F4U6_WS2812_Bit_bang.hex: CH32V003F4U6_WS2812_Bit_bang.elf
